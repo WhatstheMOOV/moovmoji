@@ -14,7 +14,7 @@ import 'fluttermojiController.dart';
 ///Note: \
 /// It is advised that a [FluttermojiCircleAvatar] also be present in the same page.
 /// to show the user a preview of the changes being made.
-class FluttermojiCustomizer extends StatefulWidget {
+class MoovmojiCustomizer extends StatefulWidget {
   /// Creates a widget UI to customize the Fluttermoji
   ///
   /// You may provide a [FluttermojiThemeData] instance to adjust the appearance of this
@@ -27,13 +27,14 @@ class FluttermojiCustomizer extends StatefulWidget {
   ///Note: \
   /// It is advised that a [FluttermojiCircleAvatar] also be present in the same page.
   /// to show the user a preview of the changes being made.
-  FluttermojiCustomizer({
+  MoovmojiCustomizer({
     Key? key,
     this.scaffoldHeight,
     this.scaffoldWidth,
     FluttermojiThemeData? theme,
     List<String>? attributeTitles,
     List<String>? attributeIcons,
+    required this.specials,
     this.autosave = true,
   })  : assert(
           attributeTitles == null || attributeTitles.length == attributesCount,
@@ -49,6 +50,8 @@ class FluttermojiCustomizer extends StatefulWidget {
         this.attributeTitles = attributeTitles ?? defaultAttributeTitles,
         this.attributeIcons = attributeIcons ?? defaultAttributeIcons,
         super(key: key);
+
+  final List<String> specials;
 
   final double? scaffoldHeight;
   final double? scaffoldWidth;
@@ -88,10 +91,10 @@ class FluttermojiCustomizer extends StatefulWidget {
   static const int attributesCount = 11;
 
   @override
-  _FluttermojiCustomizerState createState() => _FluttermojiCustomizerState();
+  _MoovmojiCustomizerState createState() => _MoovmojiCustomizerState();
 }
 
-class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
+class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
     with SingleTickerProviderStateMixin {
   late FluttermojiController fluttermojiController;
   late TabController tabController;
@@ -103,7 +106,9 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
     super.initState();
 
     var _fluttermojiController;
-    Get.put(FluttermojiController());
+    Get.put(FluttermojiController(
+      specials: widget.specials,
+    ));
     _fluttermojiController = Get.find<FluttermojiController>();
 
     setState(() {
@@ -236,6 +241,8 @@ class _FluttermojiCustomizerState extends State<FluttermojiCustomizer>
       /// Eg: "Hairstyle" attribue has 38 options
       var attributeListLength =
           fluttermojiProperties[attribute.key!]!.property!.length;
+
+      print(fluttermojiProperties[attribute.key!]!.property!);
 
       /// Number of tiles per horizontal row,
       int gridCrossAxisCount;

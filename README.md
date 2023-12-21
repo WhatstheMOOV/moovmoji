@@ -8,7 +8,7 @@ This package provides you three easy-to-use widgets -
 | Name | Description | Screenshot | 
 |--------|----------|---------- |
 |FluttermojiCircleAvatar | Use your fluttermoji anywhere in your Flutter app with a simple customizable widget. Supports material dark theme too.| ![1608830483994](https://user-images.githubusercontent.com/37346450/103071632-009ec100-45ea-11eb-97c4-96c9ec67e204.gif)
-|FluttermojiCustomizer | A comprehensize UI to customize the user's fluttermoji. Offers previews of each individual component and whose looks can be tweaked with a `FluttermojiThemeData`|![1608827561239](https://user-images.githubusercontent.com/37346450/154008536-a687828c-dc9d-4a62-aa11-b800d4fb7763.jpg)
+|MoovmojiCustomizer | A comprehensize UI to customize the user's fluttermoji. Offers previews of each individual component and whose looks can be tweaked with a `FluttermojiThemeData`|![1608827561239](https://user-images.githubusercontent.com/37346450/154008536-a687828c-dc9d-4a62-aa11-b800d4fb7763.jpg)
 |FluttermojiSaveWidget | Renders a save button by default OR can be used as an [InkWell] wrapper for the [child] widget.|![1608827561239](https://user-images.githubusercontent.com/37346450/154008545-8325af7b-58a2-4419-8544-929ffbdbb9ff.jpg)
 
 ******
@@ -55,7 +55,7 @@ SVG Assets used are derived from [getavataaars.com](https://getavataaars.com/) .
 	```
 4. To allow your users to personalize their Fluttermoji, add the following widget and pair it with the above one in your page.
 	```dart
-	FluttermojiCustomizer();
+	MoovmojiCustomizer();
 	```
 
 That's all it takes, simple right ? The two widgets communicate with each other and update in real-time throughout your widget tree.

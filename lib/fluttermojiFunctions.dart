@@ -51,12 +51,14 @@ class FluttermojiFunctions {
 
   /// Decode your string containing the attributes to a SVG and render it
   /// by enclosing this string with a SvgPicture.string()
-  String decodeFluttermojifromString(String encodedData) {
+  String decodeFluttermojifromString(
+      String encodedData, List<String> specials) {
     if (encodedData != '') _decodedList = Map.from(jsonDecode(encodedData));
 
     String _fluttermojiStyle =
         fluttermojiStyle[_getFluttermojiProperty('style')]!;
     String _clothe = Clothes.generateClothes(
+        specials: specials,
         clotheType: _getFluttermojiProperty('clotheType'),
         clColor: _getFluttermojiProperty('clotheColor'))!;
     String _facialhair = FacialHair.generateFacialHair(

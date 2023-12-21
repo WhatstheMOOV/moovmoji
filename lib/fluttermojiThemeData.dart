@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermoji/fluttermojiCustomizer.dart';
 
-/// Defines the configuration of the overall visual [theme] for a [FluttermojiCustomizer]
+/// Defines the configuration of the overall visual [theme] for a [MoovmojiCustomizer]
 /// and the widgets within it.
 ///
-/// The [FluttermojiCustomizer]'s `theme` property can be used to configure the appearance
+/// The [MoovmojiCustomizer]'s `theme` property can be used to configure the appearance
 /// of the entire widget.
 ///
 /// You can set the attributes of this class to make the customizer look more in
@@ -14,21 +14,21 @@ import 'package:fluttermoji/fluttermojiCustomizer.dart';
 /// * [FluttermojiThemeData.standard] which is applied by default to the widgets.
 class FluttermojiThemeData {
   /// Customize the style of the attributes' titles at the top
-  /// of the [FluttermojiCustomizer]
+  /// of the [MoovmojiCustomizer]
   final TextStyle labelTextStyle;
 
-  /// Background color of the top and bottom rows of the [FluttermojiCustomizer]
+  /// Background color of the top and bottom rows of the [MoovmojiCustomizer]
   final Color primaryBgColor;
 
-  /// Background color of the grid area of the [FluttermojiCustomizer]
+  /// Background color of the grid area of the [MoovmojiCustomizer]
   final Color secondaryBgColor;
 
-  /// Box decoration style of a selected tile in a grid of [FluttermojiCustomizer]
+  /// Box decoration style of a selected tile in a grid of [MoovmojiCustomizer]
   ///
   /// Defaults to a box with green borders.
   final Decoration selectedTileDecoration;
 
-  /// Box decoration style of an uselected tile in a grid of [FluttermojiCustomizer]
+  /// Box decoration style of an uselected tile in a grid of [MoovmojiCustomizer]
   ///
   /// Defaults to [null].
   final Decoration? unselectedTileDecoration;
@@ -37,26 +37,26 @@ class FluttermojiThemeData {
   /// save button in [FluttermojiSaveButton]
   final Color iconColor;
 
-  /// Color of a selected icon in the bottom row of [FluttermojiCustomizer]
+  /// Color of a selected icon in the bottom row of [MoovmojiCustomizer]
   final Color selectedIconColor;
 
-  /// Color of an unselected icon in the bottom row of [FluttermojiCustomizer]
+  /// Color of an unselected icon in the bottom row of [MoovmojiCustomizer]
   final Color unselectedIconColor;
 
-  /// Box decoration style of the [FluttermojiCustomizer]
+  /// Box decoration style of the [MoovmojiCustomizer]
   final Decoration boxDecoration;
 
   /// Define the scroll behaviour of all scrollabes inside
-  /// the [FluttermojiCustomizer]
+  /// the [MoovmojiCustomizer]
   final ScrollPhysics scrollPhysics;
 
-  /// Padding inside each tile in the grids of the [FluttermojiCustomizer]
+  /// Padding inside each tile in the grids of the [MoovmojiCustomizer]
   final EdgeInsetsGeometry tilePadding;
 
-  /// Margin outside each tile in the grids of the [FluttermojiCustomizer]
+  /// Margin outside each tile in the grids of the [MoovmojiCustomizer]
   final EdgeInsetsGeometry tileMargin;
 
-  /// Creates a visual [theme] for the [FluttermojiCustomizer]
+  /// Creates a visual [theme] for the [MoovmojiCustomizer]
   /// and the widgets within it.
   ///
   /// You can set the attributes of this class to make the customizer look more in

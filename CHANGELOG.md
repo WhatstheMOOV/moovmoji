@@ -6,7 +6,7 @@
 
 ## [1.0.0] - 15/02/2022
  * Adds `FluttermojiThemeData` and `FluttermojiSaveWidget` to the library.
- * Fixes some visual glithes in the appbar of the `FluttermojiCustomizer`.
+ * Fixes some visual glithes in the appbar of the `MoovmojiCustomizer`.
  * Minor internal refactoring.
  * Updates dependency versions
  * BREAKING CHANGES 
@@ -22,7 +22,7 @@
 
 ## [0.2.2] - 11/10/2021
 
- * Adds toggle to show/hide save button widget in `FluttermojiCustomizer` widget.
+ * Adds toggle to show/hide save button widget in `MoovmojiCustomizer` widget.
   
 ## [0.2.1] - 03/05/2021
 

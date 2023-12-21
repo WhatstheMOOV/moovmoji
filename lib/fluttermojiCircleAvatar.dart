@@ -13,7 +13,12 @@ import 'fluttermojiController.dart';
 class FluttermojiCircleAvatar extends StatelessWidget {
   final double radius;
   final Color? backgroundColor;
-  FluttermojiCircleAvatar({Key? key, this.radius = 75.0, this.backgroundColor})
+  final List<String> specials;
+  FluttermojiCircleAvatar(
+      {Key? key,
+      this.radius = 75.0,
+      this.backgroundColor,
+      required this.specials})
       : super(key: key);
 
   @override
@@ -26,7 +31,7 @@ class FluttermojiCircleAvatar extends StatelessWidget {
 
   GetX<FluttermojiController> buildGetX() {
     return GetX<FluttermojiController>(
-        init: FluttermojiController(),
+        init: FluttermojiController(specials: specials),
         autoRemove: false,
         builder: (snapshot) {
           if (snapshot.fluttermoji.value.isEmpty) {

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
+
 import './fluttermoji_assets/style.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +22,9 @@ import 'fluttermoji_assets/top/hairStyles/hairStyle.dart';
 ///
 /// Exposes certain static functions for use by the developer
 class FluttermojiController extends GetxController {
+  final List<String> specials;
+  FluttermojiController({Key? key, required this.specials});
+
   var fluttermoji = "".obs;
 
   /// Stores the option selected by the user for each attribute
@@ -64,8 +69,7 @@ class FluttermojiController extends GetxController {
     // Replace observable [fluttermoji] with latest saved version or use default attributes if null
     fluttermoji.value = pref.getString('fluttermoji') ??
         FluttermojiFunctions().decodeFluttermojifromString(
-          jsonEncode(defaultFluttermojiOptions),
-        );
+            jsonEncode(defaultFluttermojiOptions), specials);
 
     selectedOptions = await getFluttermojiOptions();
     update();
@@ -100,8 +104,10 @@ class FluttermojiController extends GetxController {
     String _fluttermojiStyle =
         fluttermojiStyle[_getFluttermojiProperty('style')]!;
     String _clothe = Clothes.generateClothes(
-        clotheType: _getFluttermojiProperty('clotheType'),
-        clColor: _getFluttermojiProperty('clotheColor'))!;
+      clotheType: _getFluttermojiProperty('clotheType'),
+      clColor: _getFluttermojiProperty('clotheColor'),
+      specials: specials,
+    )!;
     String _facialhair = FacialHair.generateFacialHair(
         facialHairType: _getFluttermojiProperty('facialHairType'),
         fhColor: _getFluttermojiProperty('facialHairColor'))!;
@@ -184,6 +190,7 @@ xmlns:xlink="http://www.w3.org/1999/xlink">
       case 'clotheType':
         return '''<svg width="100px" height="120px" viewBox="30 100 200 250" >''' +
             Clothes.generateClothes(
+                specials: specials,
                 clotheType: ClotheType.elementAt(attributeValueIndex!),
                 clColor: ClotheColor[selectedOptions['clotheColor']])! +
             '''</svg>''';
