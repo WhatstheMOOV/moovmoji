@@ -1,4 +1,4 @@
-name: fluttermoji
+name: moovmoji
 description: A light-weight and highly customizable SVG avatar library for
   Flutter apps. Provides a Customizer Widget, CircleAvatar and other utility
   functions that are ready-to-use.
