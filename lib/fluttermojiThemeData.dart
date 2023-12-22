@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttermoji/fluttermojiCustomizer.dart';
 
 /// Defines the configuration of the overall visual [theme] for a [MoovmojiCustomizer]
 /// and the widgets within it.

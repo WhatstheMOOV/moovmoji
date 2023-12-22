@@ -177,9 +177,11 @@ const List<String> ClotheType = [
   'Hoodie',
   'CollarSweater',
   'Overall',
-  'Special1',
   'Blazer + T-Shirt',
   'BlazerSweater',
+  'Special1',
+  'Special2',
+  'Special3',
 ];
 
 const List<String> ClotheColor = [

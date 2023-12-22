@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttermoji/defaults.dart';
-import 'package:fluttermoji/fluttermojiSaveWidget.dart';
-import 'package:fluttermoji/fluttermojiThemeData.dart';
+import 'package:moovmoji/defaults.dart';
+import 'package:moovmoji/fluttermojiThemeData.dart';
+
 import 'fluttermoji_assets/fluttermojimodel.dart';
 import 'package:get/get.dart';
 import 'fluttermojiController.dart';
@@ -35,7 +35,8 @@ class MoovmojiCustomizer extends StatefulWidget {
     List<String>? attributeTitles,
     List<String>? attributeIcons,
     required this.specials,
-    this.autosave = true,
+    required this.unlockedSpecials,
+    this.autosave = false,
   })  : assert(
           attributeTitles == null || attributeTitles.length == attributesCount,
           "List of Attribute Titles must be of length $attributesCount.\n"
@@ -52,6 +53,7 @@ class MoovmojiCustomizer extends StatefulWidget {
         super(key: key);
 
   final List<String> specials;
+  final List<String> unlockedSpecials;
 
   final double? scaffoldHeight;
   final double? scaffoldWidth;
@@ -136,6 +138,19 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
       fluttermojiController.updatePreview();
       if (widget.autosave) fluttermojiController.setFluttermoji();
     }
+  }
+
+  void onTapLocked() {
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        children: [
+          Center(
+              child: Text(
+                  'Unlock this item by being active, Tapping In at games and club meetings, and winning random challenges.'))
+        ],
+      ),
+    );
   }
 
   void onArrowTap(bool isLeft) {
@@ -237,12 +252,22 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
         fluttermojiController.selectedOptions[attribute.key] = 0;
       }
 
+      print(fluttermojiProperties[attribute.key!]!
+          .property!
+          .any((e) => e.contains('Special')));
+
       /// Number of options available for said [attribute]
       /// Eg: "Hairstyle" attribue has 38 options
       var attributeListLength =
           fluttermojiProperties[attribute.key!]!.property!.length;
 
-      print(fluttermojiProperties[attribute.key!]!.property!);
+      /// Remove empty specials
+      if (fluttermojiProperties[attribute.key!]!
+          .property!
+          .any((e) => e.contains('Special'))) {
+        final empties = 3 - widget.specials.length;
+        attributeListLength -= empties;
+      }
 
       /// Number of tiles per horizontal row,
       int gridCrossAxisCount;
@@ -260,32 +285,63 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
 
       /// Build the main Tile Grid with all the options from the attribute
       var _tileGrid = GridView.builder(
-        physics: widget.theme.scrollPhysics,
-        itemCount: attributeListLength,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: gridCrossAxisCount,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
-        ),
-        itemBuilder: (BuildContext context, int index) => InkWell(
-          onTap: () => onTapOption(index, i, attribute),
-          child: Container(
-            decoration: index == i
-                ? widget.theme.selectedTileDecoration
-                : widget.theme.unselectedTileDecoration,
-            margin: widget.theme.tileMargin,
-            padding: widget.theme.tilePadding,
-            child: SvgPicture.string(
-              fluttermojiController.getComponentSVG(attribute.key, index),
-              height: 20,
-              semanticsLabel: 'Your Fluttermoji',
-              placeholderBuilder: (context) => Center(
-                child: CupertinoActivityIndicator(),
-              ),
-            ),
+          physics: widget.theme.scrollPhysics,
+          itemCount: attributeListLength,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: gridCrossAxisCount,
+            crossAxisSpacing: 4.0,
+            mainAxisSpacing: 4.0,
           ),
-        ),
-      );
+          itemBuilder: (BuildContext context, int index) {
+            bool locked = false;
+            if (attribute.key == 'clotheType') {
+              if (index == 9) {
+                locked = !widget.unlockedSpecials.contains('Special1');
+              } else if (index == 10) {
+                locked = !widget.unlockedSpecials.contains('Special2');
+              } else if (index == 11) {
+                locked = !widget.unlockedSpecials.contains('Special3');
+              }
+            }
+            return InkWell(
+              onTap: () =>
+                  locked ? onTapLocked() : onTapOption(index, i, attribute),
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Container(
+                    decoration: locked
+                        ? BoxDecoration(color: Colors.black45)
+                        : index == i
+                            ? widget.theme.selectedTileDecoration
+                            : widget.theme.unselectedTileDecoration,
+                    margin: widget.theme.tileMargin,
+                    padding: widget.theme.tilePadding,
+                    child: SvgPicture.string(
+                      fluttermojiController.getComponentSVG(
+                          attribute.key, index),
+                      height: 20,
+                      semanticsLabel: 'Your Fluttermoji',
+                      placeholderBuilder: (context) => Center(
+                        child: CupertinoActivityIndicator(),
+                      ),
+                    ),
+                  ),
+                  if (locked)
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.lock, color: Colors.white, size: 20),
+                        Text(
+                          'Locked',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                      ],
+                    )
+                ],
+              ),
+            );
+          });
 
       /// Builds the icon for the attribute to be placed in the bottom row
       var bottomNavWidget = Padding(
