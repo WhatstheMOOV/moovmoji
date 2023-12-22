@@ -144,10 +144,17 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
     showDialog(
       context: context,
       builder: (context) => SimpleDialog(
+        title: Text('Locked!'),
         children: [
-          Center(
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Center(
               child: Text(
-                  'Unlock this item by being active, Tapping In at games and club meetings, and winning random challenges.'))
+                'Unlock this item by being active, Tapping In at games, events, and club meetings, and winning random challenges.',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
         ],
       ),
     );
@@ -308,6 +315,7 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
                   locked ? onTapLocked() : onTapOption(index, i, attribute),
               child: Stack(
                 fit: StackFit.expand,
+                alignment: Alignment.topRight,
                 children: [
                   Container(
                     decoration: locked
@@ -328,15 +336,12 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
                     ),
                   ),
                   if (locked)
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.lock, color: Colors.white, size: 20),
-                        Text(
-                          'Locked',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        )
-                      ],
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.lock, color: Colors.white, size: 30),
+                      ),
                     )
                 ],
               ),
@@ -348,7 +353,7 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
           padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 12),
           child: SvgPicture.asset(
             attribute.iconAsset!,
-            package: 'fluttermoji',
+            package: 'moovmoji',
             height: attribute.iconsize ??
                 (widget.scaffoldHeight != null
                     ? widget.scaffoldHeight! / heightFactor * 0.03
