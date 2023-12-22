@@ -151,7 +151,6 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
             child: Center(
               child: Text(
                 'Unlock this item by being active, Tapping In at games, events, and club meetings, and winning random challenges.',
-                textAlign: TextAlign.center,
               ),
             ),
           )
@@ -258,10 +257,6 @@ class _MoovmojiCustomizerState extends State<MoovmojiCustomizer>
       if (!fluttermojiController.selectedOptions.containsKey(attribute.key)) {
         fluttermojiController.selectedOptions[attribute.key] = 0;
       }
-
-      print(fluttermojiProperties[attribute.key!]!
-          .property!
-          .any((e) => e.contains('Special')));
 
       /// Number of options available for said [attribute]
       /// Eg: "Hairstyle" attribue has 38 options
